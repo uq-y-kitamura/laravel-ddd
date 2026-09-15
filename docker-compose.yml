@@ -1,0 +1,13 @@
+# ローカルに PHP / Composer が無くても開発・実行できるようにするための最小構成。
+# composer:2 イメージには PHP 8.5 / pdo_sqlite / mbstring が同梱されている。
+services:
+  app:
+    image: composer:2
+    working_dir: /app
+    environment:
+      COMPOSER_HOME: /tmp/composer
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    command: php artisan serve --host=0.0.0.0 --port=8000
